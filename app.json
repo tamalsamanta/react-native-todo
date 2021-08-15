@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "noob",
-    "slug": "noob",
+    "name": "ToDo",
+    "description": "To Do List App",
+    "slug": "ToDo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,9 +14,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -23,7 +22,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.tamal.todo"
     },
     "web": {
       "favicon": "./assets/favicon.png"

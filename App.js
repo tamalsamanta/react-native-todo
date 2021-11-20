@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import { View, StatusBar, FlatList } from 'react-native'
+import { View, StatusBar, FlatList, Button, Text, StyleSheet } from 'react-native'
 import styled from 'styled-components'
 import AddInput from './Components/AddInput'
-import TodoList from './Components/TodoList'
 import * as Font from 'expo-font'
 import AppLoading from 'expo-app-loading'
 import Empty from './Components/Empty'
-import Header from './Components/Header'
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable'
 
 const getFonts = () =>
   Font.loadAsync({
@@ -14,22 +15,10 @@ const getFonts = () =>
     'poppins-bold': require('./assets/fonts/Poppins/Poppins-Bold.ttf'),
   })
 
+const Stack = createNativeStackNavigator()
+
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false)
-
-  const [data, setData] = useState([])
-
-  const submitHandler = (value) => {
-    setData((prevTodo) => {
-      return [
-        {
-          value: value,
-          key: Math.random().toString(),
-        },
-        ...prevTodo,
-      ]
-    })
-  }
 
   const deleteItem = (key) => {
     setData((prevTodo) => {
@@ -39,26 +28,16 @@ export default function App() {
 
   if (fontsLoaded) {
     return (
-      <ComponentContainer>
-        <View>
-          <StatusBar barStyle="light-content" backgroundColor="midnightblue" />
-        </View>
-
-        <View>
-          <FlatList
-            data={data}
-            ListHeaderComponent={() => <Header />}
-            ListEmptyComponent={() => <Empty />}
-            keyExtractor={(item) => item.key}
-            renderItem={({ item }) => (
-              <TodoList item={item} deleteItem={deleteItem} />
-            )}
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ title: 'Radhe Radhe' }}
           />
-          <View>
-            <AddInput submitHandler={submitHandler} />
-          </View>
-        </View>
-      </ComponentContainer>
+          <Stack.Screen name="Welcome" component={AddInput} />
+        </Stack.Navigator>
+      </NavigationContainer>
     )
   } else {
     return (
@@ -73,10 +52,41 @@ export default function App() {
   }
 }
 
+const HomeScreen = ({ navigation }) => {
+  return(
+    <ComponentContainer>
+      <View>
+        <StatusBar barStyle="light-content" backgroundColor="#d6eadf" />
+      </View>
+      <View>
+        <Empty/>
+      </View>
+      <Pressable style = {styles.button} onPress = {() => {navigation.navigate('Welcome')}}>
+        <Text>Get Started</Text>
+      </Pressable>
+    </ComponentContainer>
+  )
+}
+
+const ProfileScreen = ({ navigation, route }) => {
+  return <Text>This is {route.params.name}'s profile</Text>;
+};
+
 const ComponentContainer = styled.View`
-  background-color: midnightblue;
+  background-color: #d6eadf;
   height: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 `
+const styles = StyleSheet.create({
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 22,
+    paddingHorizontal: 52,
+    borderRadius: 10,
+    elevation: 3,
+    backgroundColor: 'white',
+  }
+})

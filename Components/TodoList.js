@@ -4,6 +4,9 @@ import { Entypo } from '@expo/vector-icons'
 import { MaterialIcons } from '@expo/vector-icons'
 import styled from 'styled-components'
 
+let hours = new Date().getHours().toString()
+let mins = new Date().getMinutes().toString()
+
 export default function TodoList({ item, deleteItem }) {
   return (
     <ComponentContainer>
@@ -13,7 +16,7 @@ export default function TodoList({ item, deleteItem }) {
         </CirlceContainer>
         <View>
           <TextItem>{item.value}</TextItem>
-          <TextDate> Task</TextDate>
+          <TextDate>{hours} : {mins}</TextDate>
         </View>
         <IconContainer onPress={() => deleteItem(item.key)}>
           <MaterialIcons name="delete" size={24} color="midnightblue" />
@@ -51,13 +54,13 @@ const TextItem = styled.Text`
 `
 
 const TextDate = styled.Text`
-  color: goldenrod;
+  color: grey;
   font-size: 15px;
   margin-right: 20px;
 
   font-family: poppins-regular;
   border-radius: 10px;
-  width: 40px;
+  width: 80px;
 `
 
 const IconContainer = styled.TouchableOpacity`

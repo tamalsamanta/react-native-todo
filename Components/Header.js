@@ -1,33 +1,29 @@
 import React from 'react'
 import styled from 'styled-components'
 
-let today = new Date().toISOString().slice(0, 10)
-
 export default function Header() {
   return (
     <ComponentContainer>
-      <HeaderText>To-Do.</HeaderText>
-      <HeaderList>{today}</HeaderList>
+      <EmptyImage source={require('../assets/images/empty.png')} />
+      <EmptyText>Add To-Do.</EmptyText>
     </ComponentContainer>
   )
 }
 
 const ComponentContainer = styled.View`
-  height: 100px;
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
+  height: 650px;
 `
 
-const HeaderText = styled.Text`
+const EmptyImage = styled.Image`
+  width: 350px;
+  height: 200px;
+`
+
+const EmptyText = styled.Text`
   color: white;
   font-family: poppins-bold;
+  margin-top: 30px;
   font-size: 30px;
-`
-
-const HeaderList = styled.Text`
-  color: white;
-  font-family: poppins-bold;
-  font-size: 20px;
-  margin-right: 20px;
 `

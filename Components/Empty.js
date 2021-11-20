@@ -4,8 +4,8 @@ import styled from 'styled-components'
 export default function Empty() {
   return (
     <ComponentContainer>
-      <EmptyImage source={require('../assets/images/empty.png')} />
-      <EmptyText>Add To-Do.</EmptyText>
+      <EmptyImage source={require('../assets/images/flute.png')} />
+      <EmptyText>HARE KRISHNA</EmptyText>
     </ComponentContainer>
   )
 }
@@ -22,7 +22,7 @@ const EmptyImage = styled.Image`
 `
 
 const EmptyText = styled.Text`
-  color: white;
+  color: black;
   font-family: poppins-bold;
   margin-top: 30px;
   font-size: 30px;
